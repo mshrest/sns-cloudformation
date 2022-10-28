@@ -1,1 +1,1 @@
-# SNS Topic creation with Cloudformation template in multiple regions
+# SNS Topic creation with AWS Cloudformation YAML template in multiple regions
