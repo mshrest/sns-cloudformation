@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "Template to intigrate custom AWS Health Dashboard"
+Resources:
+  SnsTopicForEvent:
+    Type: AWS::SNS::Topic
+    Properties: 
+      DisplayName: "SNS Topic for Customer AWS Health Dashboard Event"
+      TopicName: !Ref TopicName
+
+  SnsTopicSubscription:
+    Type: AWS::SNS::Subscription
+    Properties:
+      Endpoint: !Join 
+            - '='
+            - - https://tca.mc.nordcloud.com/aws-health-dashboard/notification?api-key=abcde&env
+              - !Ref AccountId
+      Protocol: https
+      TopicArn: !Ref SnsTopicForEvent
+
+Parameters:
+  AccountId:
+      Type: String
+      Description: Account ID of the endpoint
+
+  TopicName:
+      Type: String
+      Description: Name of the SNS topic
